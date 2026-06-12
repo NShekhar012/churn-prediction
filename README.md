@@ -21,7 +21,7 @@ Run the notebooks in order:
 03_modeling.ipynb — training and evaluation
 
 
-## Pipeline Architecture & Design Choices
+##Pipeline Architecture & Design Choices
 To ensure strict prevention of data leakage, all feature transformations (Standard Scaling for numeric variables, One-Hot Encoding for categories) are contained within a scikit-learn `ColumnTransformer`. This transformer is fit **exclusively on the training split** and is combined directly into individual classifier `Pipeline` objects. This keeps our data transformations and execution routines tightly coupled for reproducible validation and clean inference.
 
 ## Evaluation & Strategic Focus
@@ -30,5 +30,5 @@ To ensure strict prevention of data leakage, all feature transformations (Standa
 - **Business Alignment:** For customer retention campaigns, optimizing for **Recall** is prioritized over raw accuracy. Missing an actual churner (False Negative) is significantly more expensive than reaching out to a customer who wasn't planning to leave (False Positive).
 
 ## Engineering Trade-offs & Roadblocks
-- **The `TotalCharges` Type Quirks:** The raw column drops in as a string/object data type. This occurs because brand-new customers with a tenure of 0 months have blank whitespace spaces instead of numbers. Coercing this introduces NaN values, which I mitigated by tracking and applying the training median.
-- **Handling Imbalance Safely:** Instead of relying on oversampling methods like SMOTE (which can synthetically overcomplicate a dataset of this size and distort precision boundaries), I enforced stratified train-test splitting and hyperparameter constraints (`max_depth=4` and low learning rates in XGBoost) to curb overfitting.
+- **The `TotalCharges` Type Quirks:** The raw column drops in as a string/object data type. This occurs because brand-new customers with a tenure of 0 months have blank whitespace spaces instead of numbers. Coercing this introduces NaN values, which I dealt with by tracking and applying the training median.
+- **Handling Imbalance Safely:** Instead of relying on oversampling methods, I used stratified train-test splitting and hyperparameter constraints (`max_depth=4` and low learning rates in XGBoost) to curb overfitting.
