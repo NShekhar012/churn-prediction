@@ -1,14 +1,15 @@
 # Telco Customer Churn Prediction Pipeline
 
-An end-to-end machine learning pipeline built to identify high-risk churn profiles in telecom customer data. This project uses scikit-learn pipelines and XGBoost, optimizing for Recall to minimize false negatives (missed churners) for the customer retention team.
+An end-to-end machine learning pipeline built to identify high-risk churn profiles in telecom customer data. This project uses scikit-learn pipelines and XGBoost, optimizing for **Recall** to minimize false negatives (missed churners) for the customer retention team.
 
 ## Project Structure
-- `01_eda.ipynb`: Exploratory analysis and feature target distribution checking.
-- `02_preprocessing.ipynb`: Data cleaning, train-test splitting, and Feature Pipeline definition.
-- `03_modeling.ipynb`: Model training, hyperparameter tuning, and threshold evaluation.
+- `notebooks/01_eda.ipynb`: Exploratory analysis and feature target distribution checking.
+- `notebooks/02_preprocessing.ipynb`: Data cleaning, train-test splitting, and Feature Pipeline definition.
+- `notebooks/03_modeling.ipynb`: Model training, hyperparameter tuning, and threshold evaluation.
 - `data/`: Local directory for raw and processed datasets (excluded from git via .gitignore).
 
 ## Environment Setup
+
 ```bash
 pip install pandas numpy scikit-learn xgboost matplotlib seaborn jupyter pyarrow
 
@@ -31,4 +32,4 @@ To ensure strict prevention of data leakage, all feature transformations (Standa
 
 ## Engineering Trade-offs & Roadblocks
 - **The `TotalCharges` Type Quirks:** The raw column drops in as a string/object data type. This occurs because brand-new customers with a tenure of 0 months have blank whitespace spaces instead of numbers. Coercing this introduces NaN values, which I dealt with by tracking and applying the training median.
-- **Handling Imbalance Safely:** Instead of relying on oversampling methods, I used stratified train-test splitting and hyperparameter constraints (`max_depth=4` and low learning rates in XGBoost) to curb overfitting.
+- **Handling Imbalance Safely:** Instead of relying on oversampling methods, I used stratified train-test splitting and hyperparameter constraints (`max_depth=4` and low leagit add README.mdrning rates in XGBoost) to curb overfitting.
