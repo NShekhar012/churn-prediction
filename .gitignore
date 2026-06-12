@@ -1,0 +1,12 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Local data files (never commit raw/processed data to GitHub)
+data/
+*.csv
+*.parquet
+*.pkl
