@@ -33,3 +33,7 @@ To ensure strict prevention of data leakage, all feature transformations (Standa
 ## Engineering Trade-offs & Roadblocks
 - **The `TotalCharges` Type Quirks:** The raw column drops in as a string/object data type. This occurs because brand-new customers with a tenure of 0 months have blank whitespace spaces instead of numbers. Coercing this introduces NaN values, which I dealt with by tracking and applying the training median.
 - **Handling Imbalance Safely:** Instead of relying on oversampling methods, I used stratified train-test splitting and hyperparameter constraints (`max_depth=4` and low leagit add README.mdrning rates in XGBoost) to curb overfitting.
+
+## Next Steps
+- Try out feature engineering (like combining internet service types and streaming options to see if they catch high-value churn clusters).
+- Switch the basic grid search over to an Optuna study to find better hyperparameters for XGBoost faster.
